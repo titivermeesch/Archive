@@ -1,0 +1,69 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "net.opsonmc",
+    "module": "core",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.4"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "opson-core-1.0.0.jar",
+          "url": "opson-core-1.0.0.jar",
+          "size": 3532,
+          "sha512": "e79bad14582096f75e2b81d1ae95574c58b34537279ce1fa0c4e7bd01e9d63ef71240d4cb50eb9bc961aaa6253c70dbf9e1df438c196c3f6730b4f041163a165",
+          "sha256": "0217abb280aed0a590246064db65af8a11ebae800ed60da96e2fcce54cce3b14",
+          "sha1": "c3ddbc50ae1b7e006cba81bf9016cf89fe554410",
+          "md5": "9fcb4b71340dbde1419eb134eaf55c99"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "redis.clients",
+          "module": "jedis",
+          "version": {
+            "requires": "4.3.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "opson-core-1.0.0.jar",
+          "url": "opson-core-1.0.0.jar",
+          "size": 3532,
+          "sha512": "e79bad14582096f75e2b81d1ae95574c58b34537279ce1fa0c4e7bd01e9d63ef71240d4cb50eb9bc961aaa6253c70dbf9e1df438c196c3f6730b4f041163a165",
+          "sha256": "0217abb280aed0a590246064db65af8a11ebae800ed60da96e2fcce54cce3b14",
+          "sha1": "c3ddbc50ae1b7e006cba81bf9016cf89fe554410",
+          "md5": "9fcb4b71340dbde1419eb134eaf55c99"
+        }
+      ]
+    }
+  ]
+}

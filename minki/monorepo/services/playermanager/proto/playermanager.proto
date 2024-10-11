@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "minki.io/playermanager/proto";
+
+service PlayerManagerService {
+  rpc GetPlayer(GetPlayerRequest) returns (GetPlayerResponse) {}
+  rpc UpdatePlayer(UpdatePlayerRequest) returns (Empty) {}
+  rpc GetFriends(GetFriendsRequest) returns (GetFriendsResponse) {}
+  rpc AddFriend(AddFriendRequest) returns (Empty) {}
+}
+
+message Empty {}
+
+message GetPlayerRequest {
+  string uuid = 1;
+}
+
+message GetPlayerResponse {
+  string uuid = 1;
+  string username = 2;
+  int32 level = 3;
+  int32 experience = 4;
+  string rank = 5;
+  int64 first_joined = 6;
+  int64 last_joined = 7;
+}
+
+message UpdatePlayerRequest {
+  string uuid = 1;
+  string username = 2;
+  int32 level = 3;
+  int32 experience = 4;
+  string rank = 5;
+  int64 first_joined = 6;
+  int64 last_joined = 7;
+}
+
+message GetFriendsRequest {
+  string uuid = 1;
+}
+
+message Friend {
+  string uuid1 = 1;
+  string uuid2 = 2;
+  string status = 3;
+  int64 friends_since = 4;
+}
+
+message GetFriendsResponse {
+  repeated Friend friends = 1;
+}
+
+message AddFriendRequest {
+  string uuid = 1;
+  string friend_uuid = 2;
+}

@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: playermanager
+  labels:
+    app: playermanager
+spec:
+  containers:
+    - name: playermanager
+      image: minki-playermanager:latest
+      imagePullPolicy: Never
+      ports:
+        - name: grpc
+          containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: playermanager
+  labels:
+    app: playermanager
+spec:
+  selector:
+    app: playermanager
+  clusterIP: None
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

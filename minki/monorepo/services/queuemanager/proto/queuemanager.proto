@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "minki.io/queuemanager/proto";
+
+service QueueManagerService {
+  rpc QueuePlayer(QueuePlayerRequest) returns (QueuePlayerResponse) {}
+  rpc DequeuePlayer(DequeuePlayerRequest) returns (DequeuePlayerResponse) {}
+  rpc IsQueued(IsQueuedRequest) returns (IsQueuedResponse) {}
+  rpc GetAllQueues(Empty) returns (GetAllQueuesResponse) {}
+}
+
+message Empty {}
+
+message QueuePlayerRequest {
+  // Player uuid
+  string uuid = 1;
+  // Game type to join
+  string game = 2;
+  // Map to join, use * for any map
+  string map = 3;
+}
+
+message QueuePlayerResponse {
+  // Is player queued or not
+  bool success = 1;
+  // Reason for queue fail if any
+  optional string reason = 2;
+}
+
+message DequeuePlayerRequest {
+  // UUID of the player to dequeue
+  string uuid = 1;
+}
+
+message DequeuePlayerResponse {
+  // Is player dequeued or not
+  bool success = 1;
+  // Reason for dequeue fail if any
+  optional string reason = 2;
+}
+
+message IsQueuedRequest {
+  // UUID of the player to check
+  string uuid = 1;
+}
+
+message Queue {
+  string game = 1;
+  string map = 2;
+  repeated string players = 3;
+}
+
+message IsQueuedResponse {
+  // Is player queued or not
+  bool queued = 1;
+}
+
+message GetAllQueuesResponse {
+  repeated Queue queues = 1;
+}

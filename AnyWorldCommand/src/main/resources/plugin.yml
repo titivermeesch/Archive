@@ -1,0 +1,8 @@
+name: AnyWorldCommand
+author: PlayBossWar
+main: me.playbosswar.anyworldcommand.Main
+version: 1.0.0
+api-version: 1.13
+commands:
+  awc:
+    usage: /<command>

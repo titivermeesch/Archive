@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+    id "com.github.johnrengelman.shadow" version "8.1.1"
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
+
+group = 'io.minki'
+version = '1.0.0'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url = "https://jitpack.io"
+    }
+}
+
+dependencies {
+    implementation 'io.minki:gapi:1.0.0'
+    implementation 'net.minestom:minestom-snapshots:7320437640'
+    implementation 'io.github.cdimascio:dotenv-java:3.0.0'
+}
+
+jar {
+    manifest {
+        // Change this to your main class
+        attributes 'Main-Class': 'io.minki.lobby.Lobby'
+    }
+}

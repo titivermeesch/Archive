@@ -1,0 +1,21 @@
+type: 'application'
+language: 'go'
+project:
+  name: 'autoscaler'
+  description: 'Handles autoscaling requests from Agones'
+tasks:
+  build:
+    command: 'go build -o autoscaler main.go'
+    env:
+      GOOS: 'linux'
+      GOARCH: 'amd64'
+    inputs:
+      - 'go.mod'
+      - 'main.go'
+  build-docker:
+    command: 'docker build --platform linux/amd64 -t minki-autoscaler .'
+    inputs:
+      - 'Dockerfile'
+      - 'go.mod'
+      - 'go.sum'
+      - 'main.go'

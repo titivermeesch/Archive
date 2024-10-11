@@ -1,0 +1,36 @@
+.default_rules:
+  rules:
+    - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+
+stages:
+  - build
+  - upload
+
+build-source:
+  stage: build
+  image: gradle:8.0.2-jdk8
+  script: gradle :shadowJar
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - build
+      - .gradle
+
+upload-source:
+  stage: upload
+  image: ubuntu:22.04
+  variables:
+    FTP_PASSWORD: $PVP_ARENA_DEV_FTP_PASSWORD
+  before_script:
+    - apt-get update -qy
+    - apt-get install -y lftp
+  script:
+    - lftp -c "set sftp:auto-confirm yes; open -u playbosswar.de7ea337,$FTP_PASSWORD sftp://45.154.96.86 -p 2022; put -O plugins build/libs/midaria-pvp-1.0.0-all.jar; quit"
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - build
+  needs:
+    - build-source

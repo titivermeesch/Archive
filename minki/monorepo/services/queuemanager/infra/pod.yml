@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: queuemanager
+  labels:
+    app: queuemanager
+spec:
+  containers:
+    - name: queuemanager
+      image: minki-queuemanager:latest
+      imagePullPolicy: Never
+      ports:
+        - name: grpc
+          containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: queuemanager
+  labels:
+    app: queuemanager
+spec:
+  selector:
+    app: queuemanager
+  clusterIP: None
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

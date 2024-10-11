@@ -1,0 +1,14 @@
+apiVersion: autoscaling.agones.dev/v1
+kind: FleetAutoscaler
+metadata:
+  name: skywars-fleet-autoscaler
+spec:
+  fleetName: skywars
+  policy:
+    type: Webhook
+    webhook:
+      service:
+        name: autoscaler-webhook-service
+        namespace: default
+        path: scale
+        port: 8080

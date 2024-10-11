@@ -1,0 +1,22 @@
+type: 'application'
+language: 'java'
+project:
+  name: 'lobby'
+  description: 'Lobby instance'
+tasks:
+  build:
+    command: './gradlew shadowJar'
+    inputs:
+      - 'src/**/*'
+      - 'build.gradle'
+      - 'worlds/**/*'
+    outputs:
+        - 'build'
+    deps:
+      - 'gapi:local-publish'
+  build-docker:
+    command: 'docker build -t minki-lobby .'
+    inputs:
+      - 'src/**/*'
+      - 'build.gradle'
+      - 'worlds/**/*'

@@ -1,0 +1,13 @@
+name: MidariaPvp
+main: fr.midaria.pvparena.Main
+version: 1.0
+author: PlayBossWar
+depend: [Vault, Essentials, PlaceholderAPI]
+commands:
+  midariapvp:
+    usage: /<command>
+  shop:
+    usage: /<command>
+    aliases: boutique
+  warp:
+    usage: /<command>

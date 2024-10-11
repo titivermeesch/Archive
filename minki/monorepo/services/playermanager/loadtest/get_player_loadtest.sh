@@ -1,0 +1,1 @@
+ghz --insecure --proto ../proto/playermanager.proto --call playermanager.PlayerManagerService.GetPlayer --data '{"uuid": "84183035-083c-3d9a-bf4a-a62dd7d4bb6b"}' 0.0.0.0:3000

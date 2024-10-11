@@ -1,0 +1,10 @@
+main: me.playbosswar.fireball.Fireball
+name: Fireball
+version: 1.0.0
+
+commands:
+  fireballarena:
+    description: Fireball Arena Command
+    usage: /fireballarena
+    aliases: [fba]
+    permission: fireballarena.setup

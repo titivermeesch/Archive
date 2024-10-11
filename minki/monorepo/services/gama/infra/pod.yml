@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: gama
+  labels:
+    app: gama
+spec:
+  containers:
+    - name: gama
+      image: minki-gama:latest
+      imagePullPolicy: Never
+      ports:
+        - name: grpc
+          containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gama
+  labels:
+    app: gama
+spec:
+  selector:
+    app: gama
+  clusterIP: None
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

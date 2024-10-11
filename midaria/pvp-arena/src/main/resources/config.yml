@@ -1,0 +1,31 @@
+koth:
+  pos1:
+    x: 0
+    y: 0
+    z: 0
+  pos2:
+    x: 10
+    y: 10
+    z: 10
+pvpleaderboard:
+  x: 0
+  y: 0
+  z: 0
+moneyleaderboard:
+  x: 0
+  y: 0
+  z: 0
+chestevent:
+  pos1:
+    x: 0
+    y: 0
+    z: 0
+  pos2:
+    x: 0
+    y: 0
+    z: 0
+kothleaderboard:
+  x: 0
+  y: 0
+  z: 0
+minkothplayers: 5

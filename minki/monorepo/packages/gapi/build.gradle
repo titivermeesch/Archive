@@ -1,0 +1,81 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id "com.google.protobuf" version "0.9.4"
+    id "com.github.johnrengelman.shadow" version "8.1.1"
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
+
+group = 'io.minki'
+version = '1.0.0'
+
+protobuf {
+    protoc { artifact = "com.google.protobuf:protoc:4.26.1" }
+    plugins {
+        grpc { artifact = "io.grpc:protoc-gen-grpc-java:1.63.0" }
+    }
+    generateProtoTasks {
+        all()*.plugins { grpc {} }
+    }
+}
+
+sourceSets {
+    main {
+        proto {
+            srcDirs '../../services/mappy/proto'
+            srcDirs '../../services/frontman/proto'
+            srcDirs '../../services/queuemanager/proto'
+        }
+        java {
+            srcDirs 'build/generated/source/proto/main/grpc'
+        }
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url = "https://jitpack.io"
+    }
+}
+
+dependencies {
+    implementation 'io.grpc:grpc-protobuf:1.63.0'
+    implementation 'io.grpc:grpc-stub:1.63.0'
+    implementation 'io.grpc:grpc-netty:1.63.0'
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+    implementation 'com.google.protobuf:protobuf-java:4.26.1'
+    implementation 'org.slf4j:slf4j-nop:1.7.36'
+    implementation 'org.apache.kafka:kafka-clients:3.6.1'
+    implementation 'net.kyori:adventure-api:4.16.0'
+    implementation 'net.lingala.zip4j:zip4j:2.11.5'
+    implementation 'net.minestom:minestom-snapshots:7320437640'
+    implementation 'org.json:json:20240303'
+    implementation 'redis.clients:jedis:5.0.0'
+}
+
+shadowJar {
+    mergeServiceFiles()
+}
+
+jar {
+    manifest {
+        // Change this to your main class
+        attributes 'Main-Class': 'io.minki.gapi.Gapi'
+    }
+}
+
+publishing {
+    publications {
+        shadow(MavenPublication) { publication ->
+            project.shadow.component(publication)
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}

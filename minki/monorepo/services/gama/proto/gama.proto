@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option go_package = "minki.io/gama/proto";
+
+package proto;
+
+service GamaService {
+  rpc GetAvailableGameServers (GetAvailableGameServersRequest) returns (GetAvailableGameServersResponse) {}
+}
+
+message GetAvailableGameServersRequest {
+  optional string game = 1;
+  optional string map = 2;
+}
+
+message GameServer {
+  string id = 1;
+  string game = 3;
+  string map = 4;
+  // waiting, playing
+  string status = 5;
+  repeated string players = 6;
+  int32 min_players = 7;
+  int32 max_players = 8;
+  // scheduled, ready, allocated
+  string serverStatus = 9;
+}
+
+message GetAvailableGameServersResponse {
+  repeated GameServer servers = 1;
+}

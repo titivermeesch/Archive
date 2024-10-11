@@ -1,0 +1,22 @@
+type: 'application'
+language: 'java'
+project:
+  name: 'proxy'
+  description: 'Proxy'
+tasks:
+  build:
+    command: 'docker build --platform linux/amd64 -t minki-proxy .'
+    inputs:
+      - 'velocity.toml'
+      - 'forwarding.secret'
+      - 'velocity.jar'
+      - 'plugins/**/*'
+    deps:
+      - 'proxyfranz:build'
+      - 'move-file'
+    options:
+      runDepsInParallel: false
+  move-file:
+    command: 'mv @in(0) ./plugins'
+    inputs:
+      - '/plugins/proxyfranz/build/libs/proxyfranz-1.0.0-all.jar'

@@ -1,0 +1,7 @@
+name: rabbitmq
+runtime: nodejs
+description: create a rabbitmq instance along with the management gui and make them accessible in the kubernetes cluster
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: https://www.pulumi.com/ai/api/project/a714d30f-54b8-4cd8-ac06-d05b187157c4.zip

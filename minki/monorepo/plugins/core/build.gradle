@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id "com.github.johnrengelman.shadow" version "8.1.1"
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
+
+group = 'io.minki'
+version = '1.0.0'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url = "https://jitpack.io"
+    }
+}
+
+dependencies {
+    implementation 'net.minestom:minestom-snapshots:7320437640'
+    implementation 'com.github.Minestom:Minestom:33dff6f458'
+}
+
+jar {
+    manifest {
+        // Change this to your main class
+        attributes 'Main-Class': 'io.minki.core.Core'
+    }
+}

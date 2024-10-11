@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "minki.io/mappy/proto";
+
+service MappyService {
+  rpc GetMap(GetMapRequest) returns (GetMapResponse) {}
+  rpc GetRandomMap(GetRandomMapRequest) returns (GetRandomMapResponse) {}
+  rpc ListMaps(ListMapsRequest) returns (ListMapsResponse) {}
+  rpc UploadMap(UploadMapRequest) returns (UploadMapResponse) {}
+}
+
+message GetMapRequest {
+  string map = 1;
+  string game = 2;
+  string version = 3;
+}
+
+message GetMapResponse {
+  Map map = 1;
+}
+
+message UploadMapRequest {
+  string map = 1;
+  string game = 2;
+  int32 min_players = 3;
+  int32 max_players = 4;
+  string zipPath = 5;
+  string version = 6;
+}
+
+message UploadMapResponse {
+  string id = 1;
+}
+
+message ListMapsRequest {
+  string game = 1;
+}
+
+message Map {
+  string id = 1;
+  string map = 2;
+  string game = 3;
+  int32 min_players = 4;
+  int32 max_players = 5;
+  bytes data = 6;
+  string version = 7;
+}
+
+message ListMapsResponse {
+  repeated Map maps = 1;
+}
+
+message GetRandomMapRequest {
+  string game = 1;
+}
+
+message GetRandomMapResponse {
+  Map map = 1;
+}

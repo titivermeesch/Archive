@@ -1,0 +1,80 @@
+plugins {
+    id 'java'
+    id 'application'
+    id "com.github.johnrengelman.shadow" version "8.1.1"
+    id "com.google.protobuf" version "0.9.4"
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+}
+
+group = 'io.minki'
+version = '1.0.0'
+
+protobuf {
+    protoc { artifact = "com.google.protobuf:protoc:4.26.1" }
+    plugins {
+        grpc { artifact = "io.grpc:protoc-gen-grpc-java:1.63.0" }
+    }
+    generateProtoTasks {
+        all()*.plugins { grpc {} }
+    }
+}
+
+sourceSets {
+    main {
+        proto {
+            srcDirs '../../services/playermanager/proto'
+        }
+        java {
+            srcDirs 'build/generated/source/proto/main/grpc'
+        }
+    }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven {
+        name = 'papermc'
+        url = 'https://repo.papermc.io/repository/maven-public/'
+    }
+}
+
+shadowJar {
+    mergeServiceFiles()
+}
+
+dependencies {
+    compileOnly 'com.velocitypowered:velocity-api:3.3.0-SNAPSHOT'
+    compileOnly 'net.kyori:adventure-api:4.16.0'
+    implementation 'org.slf4j:slf4j-nop:1.7.36'
+    implementation 'org.apache.kafka:kafka-clients:3.6.1'
+    implementation 'io.github.cdimascio:dotenv-java:3.0.0'
+    implementation 'org.json:json:20240303'
+    implementation 'io.fabric8:kubernetes-client:6.12.1'
+    implementation 'io.fabric8:kubernetes-model-core:6.12.1'
+    implementation 'io.fabric8:kubernetes-model:6.12.1'
+    implementation 'redis.clients:jedis:5.0.0'
+    implementation 'io.minki:gapi:1.0.0'
+    implementation 'org.cache2k:cache2k-core:2.6.1.Final'
+    implementation 'io.grpc:grpc-protobuf:1.63.0'
+    implementation 'io.grpc:grpc-stub:1.63.0'
+    implementation 'io.grpc:grpc-netty:1.63.0'
+    annotationProcessor 'com.velocitypowered:velocity-api:3.3.0-SNAPSHOT'
+}
+
+ext {
+    javaMainClass = "io.minki.proxyfranz.ProxyFranz"
+}
+
+application {
+    mainClass.set(javaMainClass)
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": javaMainClass
+    }
+}

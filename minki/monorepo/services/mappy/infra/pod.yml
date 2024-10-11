@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mappy
+  labels:
+    app: mappy
+spec:
+  containers:
+    - name: mappy
+      image: minki-mappy:latest
+      imagePullPolicy: Never
+      ports:
+        - name: grpc
+          containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mappy
+  labels:
+    app: mappy
+spec:
+  selector:
+    app: mappy
+  clusterIP: None
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000

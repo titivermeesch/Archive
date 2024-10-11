@@ -1,0 +1,29 @@
+apiVersion: agones.dev/v1
+kind: GameServer
+metadata:
+  name: proxy-1
+spec:
+  ports:
+    - name: default
+      portPolicy: Static
+      containerPort: 25565
+      hostPort: 25565
+      protocol: TCPUDP
+  health:
+    disabled: true
+  template:
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: proxy
+          image: minki-proxy:latest
+          imagePullPolicy: Never
+          env:
+            - name: "KUBERNETES_TRUST_CERT"
+              value: "true"
+          resources:
+            requests:
+              memory: 1Gi
+              cpu: 200m
+            limits:
+              memory: 2Gi

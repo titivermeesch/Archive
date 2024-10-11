@@ -1,0 +1,7 @@
+name: matchmaker
+runtime: go
+description: Player matchmaker
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: ""

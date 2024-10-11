@@ -1,0 +1,27 @@
+apiVersion: agones.dev/v1
+kind: Fleet
+metadata:
+  name: lobby
+spec:
+  replicas: 0
+  template:
+    spec:
+      ports:
+        - name: default
+          portPolicy: Dynamic
+          containerPort: 25565
+          protocol: TCPUDP
+      health:
+        disabled: true
+      template:
+        spec:
+          containers:
+            - name: lobby
+              image: minki-lobby:latest
+              imagePullPolicy: Never
+              env:
+                - name: "PORT"
+                  value: "25565"
+              resources:
+                requests:
+                  memory: 256Mi

@@ -1,0 +1,32 @@
+apiVersion: agones.dev/v1
+kind: Fleet
+metadata:
+  name: skywars
+spec:
+  template:
+    metadata:
+      labels:
+        game: skywars
+        agones.dev/sdk-gameStatus: preparing
+    spec:
+      ports:
+        - name: default
+          portPolicy: Dynamic
+          containerPort: 25565
+          protocol: TCPUDP
+      lists:
+        players:
+          values: []
+      template:
+        spec:
+          containers:
+            - name: skywars
+              image: minki-skywars:latest
+              imagePullPolicy: Never
+              env:
+                - name: "PORT"
+                  value: "25565"
+              resources:
+                requests:
+                  memory: 256Mi
+                  cpu: 100m

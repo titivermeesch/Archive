@@ -1,0 +1,12 @@
+{
+  "entrypoint": "io.minki.core.Core",
+  "name": "Core",
+  "version": "1.0.0",
+  "dependencies": [],
+  "externalDependencies": {
+    "repositories": [
+    ],
+    "artifacts": [
+    ]
+  }
+}

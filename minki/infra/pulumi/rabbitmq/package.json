@@ -1,0 +1,13 @@
+{
+  "name": "rabbitmq",
+  "description": "create a rabbitmq instance along with the management gui and make them accessible in the kubernetes cluster",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "dependencies": {
+    "@pulumi/pulumi": "*",
+    "@pulumi/kubernetes": "4.4.0"
+  }
+}

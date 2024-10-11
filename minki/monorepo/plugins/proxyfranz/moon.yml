@@ -1,0 +1,13 @@
+type: 'application'
+language: 'java'
+project:
+  name: 'ProxyFranz'
+  description: 'Proxy plugin'
+tasks:
+  build:
+    command: './gradlew shadowJar'
+    inputs:
+      - 'src/**/*'
+      - 'build.gradle'
+    outputs:
+      - 'build'

@@ -1,0 +1,20 @@
+type: 'application'
+language: 'java'
+project:
+  name: 'gapi'
+  description: 'Game API'
+tasks:
+  build:
+    command: './gradlew shadowJar'
+    inputs:
+      - 'src/**/*'
+      - 'build.gradle'
+    outputs:
+      - 'build'
+  local-publish:
+    command: './gradlew publishToMavenLocal'
+    inputs:
+      - 'src/**/*'
+      - 'build.gradle'
+    outputs:
+      - 'build'
